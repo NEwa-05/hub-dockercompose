@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  hub:
+    env_file: 
+      - hub.env
+    image: ghcr.io/traefik/traefik-hub:v3
+    command:
+      - --providers.docker
+      - --hub.token=$HUB_TOKEN
+
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - "0.0.0.0:9000:80"
+      - "0.0.0.0:8080:8080"
